@@ -3,6 +3,7 @@ package service;
 import com.sparkpost.exception.SparkPostException;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import models.Users;
 
 import java.beans.BeanProperty;
 import java.util.ArrayList;
@@ -11,34 +12,27 @@ import java.util.List;
 
 public class AuthService {
 
-    ArrayList <List<String>> users = new ArrayList<>();
+    ArrayList <Users> users = new ArrayList<>();
 
     HashPassService hashPassService = new HashPassService();
 
     Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
     SparkPostService sparkPostService = new SparkPostService();
 
-    public Boolean register (String email, String userName, String password) throws SparkPostException {
-
-        List<String> user = new ArrayList<>();
-
-        user.add(email);
-        user.add(userName);
+    public Boolean register (Users user) throws SparkPostException {
 
         int i=0;
         while(i<users.size()){
-            if(user.get(0).equals(users.get(i).get(0))){
-                System.out.println("The email: " + user.get(0) + " already exists!");
+            if(users.get(i).getEmail().equals(user.getEmail())){
+                System.out.println("The email: " + user.getEmail() + " already exists!");
                 return false;
             }
             i++;
         }
 
-        user.add(argon2.hash(4, 1024 * 1024, 8, password));
-
         users.add(user);
 
-        sparkPostService.welcomeMail(email);
+        sparkPostService.welcomeMail(user.getEmail());
 
         return true;
     }
@@ -55,12 +49,13 @@ public class AuthService {
 
         int i = 0;
         while(i<users.size()){
-            if(email.equals(users.get(i).get(0))){
+            if(email.equals(users.get(i).getEmail())){
                 System.out.println("The email: " + email + " exists!");
                 vEmail = true;
-                if(argon2.verify(users.get(i).get(2), password)){
+                if(argon2.verify(users.get(i).getPassword(), password)){
                     System.out.println("The password is valid!");
                     vPassword = true;
+                    break;
                 }
             }
             i++;

@@ -1,5 +1,9 @@
 import com.sparkpost.exception.SparkPostException;
+import models.Users;
 import service.AuthService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -7,8 +11,26 @@ public class Main {
 
         AuthService authService = new AuthService();
 
-        Boolean prueba0 = authService.register("prueba@prueba.com", "prueba", "pruebaPassword");
-        Boolean prueba1 = authService.register("prueba1@prueba1.com", "prueba1", "prueba1Password");
+        List<String> studies = new ArrayList<>();
+        studies.add("Ciencias");
+        studies.add("Letras");
+        studies.add("Deporte");
+
+        List<String> complementaryStudies = new ArrayList<>();
+        studies.add("Ciencias");
+        studies.add("Letras");
+        studies.add("Deporte");
+
+        List<String> experience = new ArrayList<>();
+        studies.add("Ciencias");
+        studies.add("Letras");
+        studies.add("Deporte");
+
+        Users prueba0 = new Users("prueba@prueba.com", "prueba", "pruebaPassword", "nacionalidad", "ciudad", studies, complementaryStudies, experience);
+        Users prueba1 = new Users("prueba@prueba.com", "prueba", "pruebaPassword", "nacionalidad", "ciudad", studies, complementaryStudies, experience);
+
+        Boolean prueba0R = authService.register(prueba0);
+        Boolean prueba1R = authService.register(prueba1);
 
         int prueba3 = authService.login("prueba@prueba.com", "pruebaPassword");
         int prueba4 = authService.login("prueb@prueba.com", "pruebaPassword");
