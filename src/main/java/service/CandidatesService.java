@@ -27,6 +27,16 @@ public class CandidatesService {
         return candidatesCity;
     }
 
+    public ArrayList<Candidates> countryFilter(String country){
+        ArrayList<Candidates> candidatesCity = new ArrayList<>();
+        for (Candidates candidate : candidates){
+            if(candidate.getCountry().equals(country)){
+                candidatesCity.add(candidate);
+            }
+        }
+        return candidatesCity;
+    }
+
     public ArrayList<Candidates> presenceFilter(String presence){
         ArrayList<Candidates> candidatesPresence = new ArrayList<>();
         for (Candidates candidate : candidates){
