@@ -26,8 +26,8 @@ public class Main {
         studies.add("Letras");
         studies.add("Deporte");
 
-        Users prueba0 = new Users("prueba@prueba.com", "prueba", "pruebaPassword");
-        Users prueba1 = new Users("prueba@prueba.com", "prueba", "pruebaPassword");
+        Users prueba0 = new Users("prueba0", "prueba@prueba.com", "pruebaPassword");
+        Users prueba1 = new Users("prueba", "prueba@prueba.com", "pruebaPassword");
 
         Boolean prueba0R = authService.register(prueba0);
         Boolean prueba1R = authService.register(prueba1);

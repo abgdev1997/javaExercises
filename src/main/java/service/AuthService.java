@@ -30,10 +30,13 @@ public class AuthService {
             i++;
         }
 
+        user.setPassword(argon2.hash(22, 65536, 1, user.getPassword()));
+
         users.add(user);
 
-        sparkPostService.welcomeMail(user.getEmail());
+        //sparkPostService.welcomeMail(user.getEmail());
 
+        System.out.println("Register succesfully!");
         return true;
     }
 
